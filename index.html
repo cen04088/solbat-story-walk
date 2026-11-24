@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1a1e1b">
+  <meta name="description" content="우이 솔밭공원의 네 곳에서 듣는 동네 이야기">
+  <title>숲에서 듣는 동네 이야기</title>
+  <link rel="stylesheet" href="record-player.css">
+  <script src="park-map.js?v=7" defer></script>
+  <script src="player.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#player">재생기로 건너뛰기</a>
+  <main class="console" aria-labelledby="page-title">
+    <header class="header">
+      <div>
+        <p class="series">숲에서 듣는 동네 이야기</p>
+        <h1 id="page-title">우이 솔밭공원</h1>
+      </div>
+      <button type="button" id="gps" class="gps-button" aria-label="내 위치" title="내 위치" disabled>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>
+        </svg>
+      </button>
+    </header>
+    <div class="record-layout">
+      <div class="art" data-album="1">
+        <div class="record" aria-hidden="true"><span id="disc-number">02</span></div>
+        <figure class="sleeve">
+          <img src="solbat-2020.webp" width="900" height="600" alt="우이 솔밭근린공원의 소나무와 산책로">
+          <figcaption><span id="cover-number">02</span><span id="cover-name">솔그늘길</span></figcaption>
+        </figure>
+      </div>
+      <section class="minimap" aria-label="솔밭공원 미니맵">
+        <div class="map">
+          <canvas id="terrain" width="800" height="600" aria-hidden="true"></canvas>
+          <span class="road-label" aria-hidden="true">삼양로</span>
+          <button type="button" disabled class="pin entry" data-stop="0" aria-label="삼양로 진입광장" aria-pressed="false">1</button>
+          <button type="button" disabled class="pin pine" data-stop="1" aria-label="솔그늘길" aria-pressed="true">2</button>
+          <button type="button" disabled class="pin stream" data-stop="2" aria-label="생태연못과 실개울" aria-pressed="false">3</button>
+          <button type="button" disabled class="pin rest" data-stop="3" aria-label="장기·바둑 쉼터" aria-pressed="false">4</button>
+          <button type="button" class="map-credit" id="open-credits" aria-label="© OpenStreetMap 및 자료 출처">© OpenStreetMap</button>
+        </div>
+      </section>
+    </div>
+    <section id="player" class="listening" aria-label="레코드 재생기" tabindex="-1">
+      <p id="status" role="status"></p>
+      <div class="current">
+        <h2 id="story-title">평지에 남은 소나무 숲</h2>
+        <p id="cue">걸음을 멈추고 가까운 소나무 두 그루의 줄기를 비교해 보세요.</p>
+      </div>
+      <audio id="audio" preload="metadata" src="pine-narration.wav"></audio>
+      <div class="transport" aria-label="재생 조작">
+        <button type="button" id="previous" aria-label="이전 레코드" disabled>│◂</button>
+        <button type="button" id="play" aria-label="재생" disabled>▶</button>
+        <button type="button" id="next" aria-label="다음 레코드" disabled>▸│</button>
+        <div class="scrub">
+          <input type="range" id="seek" min="0" max="1" value="0" step="0.1" aria-label="재생 위치" disabled>
+          <span id="time">0:00</span>
+        </div>
+        <button type="button" class="text-link" id="open-text">자막</button>
+      </div>
+      <ol class="tracks" aria-label="장소별 레코드">
+        <li><button type="button" disabled data-stop="0" aria-pressed="false"><span>01</span>삼양로 진입광장</button></li>
+        <li><button type="button" disabled data-stop="1" aria-pressed="true"><span>02</span>솔그늘길</button></li>
+        <li><button type="button" disabled data-stop="2" aria-pressed="false"><span>03</span>생태연못과 실개울</button></li>
+        <li><button type="button" disabled data-stop="3" aria-pressed="false"><span>04</span>장기·바둑 쉼터</button></li>
+      </ol>
+    </section>
+  </main>
+  <dialog id="text-dialog" aria-labelledby="text-title">
+    <header class="dialog-header"><h2 id="text-title">이야기 자막</h2><form method="dialog"><button aria-label="자막 닫기">닫기</button></form></header>
+    <div id="lines"></div>
+  </dialog>
+  <dialog id="credits-dialog" aria-labelledby="credits-title">
+    <header class="dialog-header"><h2 id="credits-title">자료 출처</h2><form method="dialog"><button aria-label="자료 출처 닫기">닫기</button></form></header>
+    <ul class="credit-list">
+      <li>사진 <a href="https://data.si.re.kr/photo/06C02007Ac70000">서울경관기록화 사업 2020, 서울특별시</a>. 재킷 크기에 맞춰 잘라 표시했습니다.</li>
+      <li>공원 배치 <a href="https://parks.seoul.go.kr/cheditor/attach/20110613/zkpjOxqn.jpg">강북구 공식 안내도</a></li>
+      <li>위치 자료 <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap 기여자</a></li>
+      <li>한국어 합성 음성</li>
+    </ul>
+  </dialog>
+</body>
+</html>
